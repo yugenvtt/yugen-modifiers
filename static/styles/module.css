@@ -1,0 +1,196 @@
+/**
+ * @file static/styles/module.css
+ * styles for the yugen-modifiers module.
+ **/
+
+.yugen-modifiers-tooltip {
+	position: fixed;
+	z-index: 10000;
+	pointer-events: none;
+	background: rgba( 22, 22, 26, 0.92 );
+	backdrop-filter: blur( 10px );
+	-webkit-backdrop-filter: blur( 10px );
+	border: 1px solid rgba( 255, 255, 255, 0.08 );
+	border-radius: 8px;
+	padding: 12px 14px;
+	box-shadow: 0 8px 32px rgba( 0, 0, 0, 0.5 ), inset 0 1px 0 rgba( 255, 255, 255, 0.05 );
+	color: #e2e8f0;
+	font-family: 'Signika', sans-serif;
+	min-width: 220px;
+	max-width: 340px;
+	font-size: 13px;
+	opacity: 0;
+	transform: translateY( 5px );
+	transition: opacity 0.18s cubic-bezier( 0.215, 0.61, 0.355, 1 ), transform 0.18s cubic-bezier( 0.215, 0.61, 0.355, 1 );
+}
+
+.yugen-modifiers-tooltip.visible {
+	opacity: 1;
+	transform: translateY( 0 );
+}
+
+.yugen-modifiers-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+	gap: 16px;
+}
+
+.yugen-modifiers-formula {
+	font-size: 12px;
+	color: #94a3b8;
+	font-family: monospace;
+	word-break: break-all;
+}
+
+.yugen-modifiers-total-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.yugen-modifiers-total-label {
+	font-size: 11px;
+	text-transform: uppercase;
+	color: #64748b;
+	letter-spacing: 0.5px;
+}
+
+.yugen-modifiers-total {
+	font-size: 18px;
+	font-weight: bold;
+	color: #38bdf8;
+	text-shadow: 0 0 10px rgba( 56, 189, 248, 0.3 );
+}
+
+.yugen-modifiers-divider {
+	height: 1px;
+	background: linear-gradient( to right, rgba( 255, 255, 255, 0.1 ), rgba( 255, 255, 255, 0.02 ) );
+	margin-bottom: 8px;
+}
+
+.yugen-modifiers-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.yugen-modifiers-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.yugen-modifiers-icon {
+	flex: 0 0 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 11px;
+	color: #64748b;
+}
+
+.yugen-modifiers-label {
+	flex: 1;
+	color: #cbd5e1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.yugen-modifiers-value {
+	font-family: monospace;
+	font-weight: bold;
+	color: #f1f5f9;
+}
+
+.yugen-modifiers-value.positive {
+	color: #34d399;
+}
+
+.yugen-modifiers-value.negative {
+	color: #f87171;
+}
+
+.yugen-modifiers-dice-results {
+	font-size: 10px;
+	color: #64748b;
+	margin-left: 4px;
+}
+
+.yugen-modifiers-tooltip.critical {
+	border-color: rgba( 52, 211, 153, 0.4 );
+	box-shadow: 0 8px 32px rgba( 0, 0, 0, 0.6 ), inset 0 1px 0 rgba( 255, 255, 255, 0.05 ), 0 0 15px rgba( 52, 211, 153, 0.25 );
+}
+
+.yugen-modifiers-tooltip.critical .yugen-modifiers-total {
+	color: #34d399;
+	text-shadow: 0 0 10px rgba( 52, 211, 153, 0.4 );
+}
+
+.yugen-modifiers-tooltip.fumble {
+	border-color: rgba( 248, 113, 113, 0.4 );
+	box-shadow: 0 8px 32px rgba( 0, 0, 0, 0.6 ), inset 0 1px 0 rgba( 255, 255, 255, 0.05 ), 0 0 15px rgba( 248, 113, 113, 0.25 );
+}
+
+.yugen-modifiers-tooltip.fumble .yugen-modifiers-total {
+	color: #f87171;
+	text-shadow: 0 0 10px rgba( 248, 113, 113, 0.4 );
+}
+
+.yugen-modifiers-tooltip.pinned {
+	pointer-events: auto;
+	border-color: rgba( 251, 191, 36, 0.4 );
+	box-shadow: 0 8px 32px rgba( 0, 0, 0, 0.6 ), inset 0 1px 0 rgba( 255, 255, 255, 0.05 ), 0 0 15px rgba( 251, 191, 36, 0.15 );
+}
+
+.yugen-modifiers-pin-indicator {
+	font-size: 10px;
+	color: #fbbf24;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	background: rgba( 251, 191, 36, 0.1 );
+	padding: 2px 6px;
+	border-radius: 4px;
+	border: 1px solid rgba( 251, 191, 36, 0.2 );
+}
+
+.yugen-modifiers-badge {
+	font-size: 9px;
+	font-weight: bold;
+	padding: 2px 5px;
+	border-radius: 4px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	display: inline-flex;
+	align-items: center;
+}
+
+.yugen-modifiers-badge.advantage {
+	background: rgba( 52, 211, 153, 0.15 );
+	color: #34d399;
+	border: 1px solid rgba( 52, 211, 153, 0.3 );
+}
+
+.yugen-modifiers-badge.disadvantage {
+	background: rgba( 251, 146, 60, 0.15 );
+	color: #fb923c;
+	border: 1px solid rgba( 251, 146, 60, 0.3 );
+}
+
+.yugen-modifiers-damage-type {
+	font-size: 9px;
+	font-weight: bold;
+	padding: 1px 4px;
+	border-radius: 3px;
+	margin-left: 6px;
+	text-transform: uppercase;
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+}

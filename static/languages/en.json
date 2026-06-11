@@ -1,0 +1,8 @@
+{
+  "yugen-modifiers.settings.debug-mode.name": "Debug Mode",
+  "yugen-modifiers.settings.debug-mode.hint": "Enable detailed logs for dice modifier parsing.",
+  "yugen-modifiers.settings.tooltip-delay.name": "Tooltip Delay",
+  "yugen-modifiers.settings.tooltip-delay.hint": "The delay in milliseconds before the floating breakdown tooltip is displayed.",
+  "yugen-modifiers.settings.enable-pinning.name": "Enable Tooltip Pinning",
+  "yugen-modifiers.settings.enable-pinning.hint": "Allow pinning the tooltip on the screen by holding Shift or Ctrl when moving the mouse away."
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+foundryconfig.json
+.DS_Store
+.env
+module.zip
+module.json
+package-lock.json
+vite.local.ts
