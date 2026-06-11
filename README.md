@@ -2,6 +2,8 @@
 
 _floating breakdown overlay tooltips for dice roll modifiers in the chat log._
 
+![yugen-modifiers preview](.github/assets/preview.png)
+
 ---
 
 This module intercepts dice roll results in the chat log and provides a clean, beautiful, absolutely positioned floating overlay that breaks down the math into readable, labeled components when hovered.
