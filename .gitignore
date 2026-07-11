@@ -7,3 +7,5 @@ module.zip
 module.json
 package-lock.json
 vite.local.ts
+build/
+
