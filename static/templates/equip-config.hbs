@@ -1,0 +1,80 @@
+<div class="yugen-equip-config-container">
+	<header class="sheet-header">
+		<img class="profile-img" src="{{actorImg}}" title="{{actorName}}" />
+		<div class="header-details">
+			<h1 class="charname">{{actorName}}</h1>
+			<div class="subtitle">{{localize "yugen-modifiers.equip-tokens.subtitle"}}</div>
+		</div>
+	</header>
+
+	<div class="yugen-config-body">
+
+		<!-- Search Inventory -->
+		<div class="yugen-equip-search">
+			<input type="text" class="yugen-equip-search-input" placeholder="{{localize "yugen-modifiers.equip-tokens.ui.search-placeholder"}}" />
+		</div>
+
+		<!-- Configured Items -->
+		<div class="yugen-equip-section">
+			<div class="yugen-equip-section-title">{{localize "yugen-modifiers.equip-tokens.ui.configured-items-header"}}</div>
+			<div class="yugen-equip-list" id="configured-list">
+				{{#each configuredItems}}
+				<div class="yugen-equip-item-row" data-item-id="{{this.itemId}}">
+					<div class="yugen-equip-item-info">
+						<img class="yugen-equip-item-icon" src="{{this.icon}}" />
+						<span class="yugen-equip-item-name" title="{{this.name}}">{{this.name}}</span>
+					</div>
+					
+					<div class="yugen-equip-image-fields">
+						<input type="text" name="image_{{this.itemId}}" value="{{this.imagePath}}" placeholder="{{localize "yugen-modifiers.equip-tokens.ui.image-path"}}" />
+						<button type="button" class="yugen-equip-browse-btn" data-action="browse-item" data-item-id="{{this.itemId}}">
+							<i class="fas fa-file-import"></i>
+						</button>
+					</div>
+
+					<span class="yugen-equip-status-badge {{#if this.isEquipped}}yugen-equip-status-equipped{{else}}yugen-equip-status-unequipped{{/if}}">
+						{{#if this.isEquipped}}{{localize "yugen-modifiers.equip-tokens.ui.equipped"}}{{else}}{{localize "yugen-modifiers.equip-tokens.ui.unequipped"}}{{/if}}
+					</span>
+
+					<button type="button" class="yugen-equip-remove-btn" data-action="remove-item" data-item-id="{{this.itemId}}">
+						<i class="fas fa-trash"></i>
+					</button>
+				</div>
+				{{else}}
+				<div class="yugen-equip-empty-msg">{{localize "yugen-modifiers.equip-tokens.ui.no-items"}}</div>
+				{{/each}}
+			</div>
+		</div>
+
+		<!-- Available Inventory Items to Add -->
+		<div class="yugen-equip-section">
+			<div class="yugen-equip-section-title">{{localize "yugen-modifiers.equip-tokens.ui.add-item-header"}}</div>
+			<div class="yugen-equip-list" id="available-list">
+				{{#each availableItems}}
+				<div class="yugen-equip-item-row yugen-equip-available-row" data-item-id="{{this.id}}" data-search-name="{{this.searchName}}">
+					<div class="yugen-equip-item-info">
+						<img class="yugen-equip-item-icon" src="{{this.img}}" />
+						<span class="yugen-equip-item-name" title="{{this.name}}">{{this.name}}</span>
+					</div>
+
+					<span class="yugen-equip-status-badge {{#if this.isEquipped}}yugen-equip-status-equipped{{else}}yugen-equip-status-unequipped{{/if}}">
+						{{#if this.isEquipped}}{{localize "yugen-modifiers.equip-tokens.ui.equipped"}}{{else}}{{localize "yugen-modifiers.equip-tokens.ui.unequipped"}}{{/if}}
+					</span>
+
+					<button type="button" class="yugen-equip-action-btn" data-action="add-item" data-item-id="{{this.id}}">
+						<i class="fas fa-plus"></i> {{localize "yugen-modifiers.equip-tokens.ui.add"}}
+					</button>
+				</div>
+				{{else}}
+				<div class="yugen-equip-empty-msg">{{localize "yugen-modifiers.equip-tokens.ui.no-matching-items"}}</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+
+	<footer class="sheet-footer">
+		<button type="submit">
+			<i class="fas fa-save"></i> Save Changes
+		</button>
+	</footer>
+</div>

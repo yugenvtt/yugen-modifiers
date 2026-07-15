@@ -5,6 +5,10 @@
 
 import { RollParser } from '../module/roll-parser.js';
 import { hover_token_hook } from './hover-token.js';
+import { get_scene_control_buttons_hook } from './get-scene-control-buttons.js';
+import { update_item_hook } from './update-item.js';
+import { delete_item_hook } from './delete-item.js';
+import { update_actor_hook } from './update-actor.js';
 
 export const init_hook = ( ) => 
 {
@@ -14,6 +18,10 @@ export const init_hook = ( ) =>
 		register_settings( );
 		RollParser.activate_listeners( );
 		hover_token_hook( );
+		get_scene_control_buttons_hook( );
+		update_item_hook( );
+		delete_item_hook( );
+		update_actor_hook( );
 	} );
 };
 
@@ -58,6 +66,19 @@ const register_settings = ( ) =>
 		name: 'yugen-modifiers.settings.enable-token-hover-effects.name',
 		hint: 'yugen-modifiers.settings.enable-token-hover-effects.hint',
 		scope: 'client',
+		config: true,
+		type: Boolean,
+		default: true
+	} );
+
+	/**
+	 * register setting for enabling token configurations
+	 **/
+	( game as any ).settings.register( 'yugen-modifiers', 'enable-token-configurations', 
+	{
+		name: 'yugen-modifiers.settings.enable-token-configurations.name',
+		hint: 'yugen-modifiers.settings.enable-token-configurations.hint',
+		scope: 'world',
 		config: true,
 		type: Boolean,
 		default: true

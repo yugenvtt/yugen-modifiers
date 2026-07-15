@@ -399,3 +399,299 @@
 	margin-top: 2px;
 }
 
+.is-hidden
+{
+	display: none !important;
+}
+
+.yugen-equip-search
+{
+	margin-bottom: 16px;
+}
+
+.yugen-equip-search-input
+{
+	width: 100%;
+	font-family: var( --yugen-font-family ) !important;
+}
+
+.yugen-equip-section
+{
+	border: 1px solid var( --yugen-border-color );
+	border-radius: var( --yugen-border-radius-md );
+	padding: 16px;
+	margin-bottom: 20px;
+	background: rgba( 255, 255, 255, 0.01 );
+}
+
+.yugen-equip-section-title
+{
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: var( --yugen-accent );
+	margin-bottom: 12px;
+	border-bottom: 1px solid var( --yugen-border-color );
+	padding-bottom: 6px;
+}
+
+.yugen-equip-list
+{
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	max-height: 250px;
+	overflow-y: auto;
+}
+
+.yugen-equip-item-row
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 12px;
+	background: rgba( 255, 255, 255, 0.02 );
+	border: 1px solid var( --yugen-border-color );
+	border-radius: var( --yugen-border-radius-sm );
+	gap: 12px;
+	transition: background-color 0.2s ease;
+}
+
+.yugen-equip-item-row:hover
+{
+	background: rgba( 255, 255, 255, 0.04 );
+}
+
+.yugen-equip-item-info
+{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex: 1;
+	min-width: 150px;
+}
+
+.yugen-equip-item-icon
+{
+	width: 32px;
+	height: 32px;
+	object-fit: cover;
+	border-radius: var( --yugen-border-radius-sm );
+	border: 1px solid var( --yugen-border-color );
+}
+
+.yugen-equip-item-name
+{
+	font-size: 0.85rem;
+	font-weight: 500;
+	color: var( --yugen-text-primary );
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.yugen-equip-image-fields
+{
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex: 2;
+	min-width: 250px;
+}
+
+.yugen-equip-image-fields input
+{
+	flex: 1;
+}
+
+.yugen-equip-status-badge
+{
+	font-size: 0.7rem;
+	font-weight: 700;
+	padding: 3px 8px;
+	border-radius: 12px;
+	text-transform: uppercase;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	min-width: 80px;
+	line-height: 1;
+}
+
+.yugen-equip-status-equipped
+{
+	background: rgba( 16, 185, 129, 0.15 );
+	color: #10b981;
+	border: 1px solid rgba( 16, 185, 129, 0.3 );
+}
+
+.yugen-equip-status-unequipped
+{
+	background: rgba( 244, 63, 94, 0.1 );
+	color: var( --yugen-danger );
+	border: 1px solid var( --yugen-danger-border );
+}
+
+.yugen-equip-action-btn
+{
+	padding: 4px 10px !important;
+	height: 30px !important;
+	font-size: 0.75rem !important;
+}
+
+.yugen-equip-remove-btn
+{
+	color: var( --yugen-danger ) !important;
+	background: var( --yugen-danger-trans ) !important;
+	border-color: var( --yugen-danger-border ) !important;
+	width: 30px !important;
+	height: 30px !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	border-radius: var( --yugen-border-radius-sm );
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.yugen-equip-remove-btn:hover
+{
+	background: rgba( 244, 63, 94, 0.2 ) !important;
+	border-color: rgba( 244, 63, 94, 0.4 ) !important;
+}
+
+.yugen-equip-browse-btn
+{
+	width: 30px !important;
+	height: 30px !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	cursor: pointer;
+	border-radius: var( --yugen-border-radius-sm );
+	border: 1px solid var( --yugen-border-color );
+	background: rgba( 255, 255, 255, 0.05 );
+	color: var( --yugen-text-primary );
+	transition: all 0.2s ease;
+}
+
+.yugen-equip-browse-btn:hover
+{
+	background: rgba( 255, 255, 255, 0.1 );
+	border-color: var( --yugen-accent );
+}
+
+.yugen-equip-remove-btn i,
+.yugen-equip-browse-btn i
+{
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.yugen-equip-default-row
+{
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 20px;
+	padding: 12px;
+	background: rgba( 255, 255, 255, 0.03 );
+	border: 1px solid var( --yugen-border-color );
+	border-radius: var( --yugen-border-radius-md );
+}
+
+.yugen-equip-default-row label
+{
+	font-weight: 700;
+	font-size: 0.85rem;
+	color: var( --yugen-accent );
+	min-width: 130px;
+}
+
+.yugen-equip-empty-msg
+{
+	font-size: 0.8rem;
+	color: var( --yugen-text-muted );
+	font-style: italic;
+	text-align: center;
+	padding: 16px;
+}
+
+.yugen-equip-config-container
+{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.yugen-config-body
+{
+	flex: 1;
+	overflow-y: auto;
+	padding: 20px;
+}
+
+.yugen-equip-config-container .sheet-header
+{
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 20px 20px 14px 20px;
+	border-bottom: 1px solid var( --yugen-border-color );
+	background: rgba( 5, 6, 9, 0.15 );
+}
+
+.yugen-equip-config-container .sheet-header img.profile-img
+{
+	flex: 0 0 48px;
+	width: 48px;
+	height: 48px;
+	border-radius: var( --yugen-border-radius-md );
+	border: 1px solid var( --yugen-border-color );
+}
+
+.yugen-equip-config-container .sheet-header .header-details
+{
+	flex: 1;
+}
+
+.yugen-equip-config-container .sheet-header h1.charname
+{
+	margin: 0;
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #ffffff;
+	border: none;
+}
+
+.yugen-equip-config-container .sheet-header .subtitle
+{
+	margin: 2px 0 0 0;
+	font-size: 0.75rem;
+	color: var( --yugen-text-secondary );
+}
+
+.yugen-equip-config-container .sheet-footer
+{
+	flex: 0 0 auto;
+	padding: 14px 20px 20px 20px;
+	border-top: 1px solid var( --yugen-border-color );
+	display: flex;
+	gap: 12px;
+	justify-content: flex-end;
+	background: rgba( 5, 6, 9, 0.15 );
+}
+
+.yugen-equip-config-container .sheet-footer button
+{
+	height: 38px;
+	padding: 0 20px;
+}
+
