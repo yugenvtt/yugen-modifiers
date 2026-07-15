@@ -27,8 +27,8 @@ export async function reevaluate_token_image( actor: any ): Promise<void>
 	let default_img = ( globalThis as any ).yugen_utils.get_flag( actor, 'yugen-modifiers', 'default_image' );
 	if ( !default_img ) 
 	{
-		default_img = actor.prototypeToken?.texture?.src || '';
-		/** save current prototype token image as default reference **/
+		default_img = actor.isToken ? actor.token?.texture?.src : ( actor.prototypeToken?.texture?.src || '' );
+		/** save current token image as default reference **/
 		await ( globalThis as any ).yugen_utils.set_flag( actor, 'yugen-modifiers', 'default_image', default_img, { yugen_modifier_update: true } );
 	}
 
@@ -78,7 +78,7 @@ export async function reevaluate_token_image( actor: any ): Promise<void>
 		if ( target_img && current_token_img !== target_img ) 
 		{
 			/** update scene token texture path **/
-			await token.document.update( { 'texture.src': target_img } );
+			await token.document.update( { 'texture.src': target_img }, { yugen_modifier_update: true } );
 		}
 	}
 }

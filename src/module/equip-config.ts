@@ -112,6 +112,12 @@ export class EquipConfig extends HandlebarsApplicationMixin( ApplicationV2 )
 		
 		const html = this.element;
 
+		if ( ( html as any )._listeners_bound ) 
+		{
+			return;
+		}
+		( html as any )._listeners_bound = true;
+
 		/** prevent normal form submit refreshing the page **/
 		html.addEventListener( 'submit', async ( event: Event ) => 
 		{
@@ -120,13 +126,13 @@ export class EquipConfig extends HandlebarsApplicationMixin( ApplicationV2 )
 			void this.close( );
 		} );
 
-		/** setup search filtering listener **/
-		const search_input = html.querySelector( '.yugen-equip-search-input' ) as HTMLInputElement;
-		if ( search_input ) 
+		/** setup search filtering listener via delegation **/
+		html.addEventListener( 'input', ( event: Event ) => 
 		{
-			search_input.addEventListener( 'input', ( event: Event ) => 
+			const target = event.target as HTMLInputElement;
+			if ( target && target.classList.contains( 'yugen-equip-search-input' ) ) 
 			{
-				const query = ( event.target as HTMLInputElement ).value.toLowerCase( ).trim( );
+				const query = target.value.toLowerCase( ).trim( );
 				const rows = html.querySelectorAll( '.yugen-equip-available-row' );
 				for ( const row of rows ) 
 				{
@@ -141,8 +147,8 @@ export class EquipConfig extends HandlebarsApplicationMixin( ApplicationV2 )
 						html_row.classList.add( 'is-hidden' );
 					}
 				}
-			} );
-		}
+			}
+		} );
 
 		/** listen for click actions using delegation **/
 		html.addEventListener( 'click', ( event: Event ) => 

@@ -9,6 +9,7 @@ import { get_scene_control_buttons_hook } from './get-scene-control-buttons.js';
 import { update_item_hook } from './update-item.js';
 import { delete_item_hook } from './delete-item.js';
 import { update_actor_hook } from './update-actor.js';
+import { update_token_hook } from './update-token.js';
 
 export const init_hook = ( ) => 
 {
@@ -22,6 +23,7 @@ export const init_hook = ( ) =>
 		update_item_hook( );
 		delete_item_hook( );
 		update_actor_hook( );
+		update_token_hook( );
 	} );
 };
 
