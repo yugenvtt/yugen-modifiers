@@ -5,6 +5,8 @@ Breakdown of dice rolls and modifiers as well as token information (health, cond
 
 ![yugen-modifiers preview](.github/assets/preview.png)
 
+![yugen-modifiers armor preview](.github/assets/yugen-modifier-armor-no-music-480.gif)
+
 [![yugen-modifiers token hover preview 1](.github/assets/hover-preview-1.png)](https://youtube.com/shorts/4-EvI7thfxI?feature=share) [![yugen-modifiers token hover preview 2](.github/assets/hover-preview-2.png)](https://youtube.com/shorts/4-EvI7thfxI?feature=share)
 
 
