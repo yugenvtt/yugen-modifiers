@@ -1,6 +1,6 @@
 {
 	"name": "yugen-modifiers",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Breakdown of dice rolls and modifiers as well as token information (health, conditions, gear, race, name, etc.). Token information can be customized or turned off. Foundry VTT module.",
 	"main": "index.js",
 	"type": "module",
