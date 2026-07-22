@@ -239,6 +239,9 @@ export class TokenHoverManager
 			}
 		}
 
+		/** retrieve setting for showing equipped weapons **/
+		const show_weapons = ( game as any ).settings.get( 'yugen-modifiers', 'show-equipped-weapons' );
+
 		/** retrieve setting for showing non-physical weapons **/
 		const show_non_physical = ( game as any ).settings.get( 'yugen-modifiers', 'show-non-physical-weapons' );
 
@@ -247,7 +250,7 @@ export class TokenHoverManager
 		];
 
 		/** retrieve equipped weapons from actor items **/
-		if ( actor.items ) 
+		if ( actor.items && show_weapons ) 
 		{
 			for ( const item of actor.items ) 
 			{
@@ -356,58 +359,6 @@ export class TokenHoverManager
 			}
 		}
 
-		if ( unique_effects.length === 0 && weapons.length === 0 && armor.length === 0 ) 
-		{
-			return;
-		}
-
-		/** retrieve settings for hiding name and showing race **/
-		const hide_name = ( game as any ).settings.get( 'yugen-modifiers', 'hide-token-name' );
-		const show_race = ( game as any ).settings.get( 'yugen-modifiers', 'show-token-race' );
-
-		let race_str = '';
-		if ( show_race ) 
-		{
-			let race = '';
-			if ( actor.system?.details?.race ) 
-			{
-				race = typeof actor.system.details.race === 'string'
-					? actor.system.details.race
-					: ( actor.system.details.race.name || '' );
-			}
-
-			if ( !race ) 
-			{
-				/** check for race or ancestry item in actor items **/
-				const race_item = actor.items?.find( ( i: any ) => 
-					i.type === 'race' || 
-					i.type === 'ancestry' 
-				);
-
-				if ( race_item ) 
-				{
-					race = race_item.name;
-				}
-			}
-
-			if ( race ) 
-			{
-				race_str = race;
-			}
-		}
-
-		let header_text = '';
-		const token_name = token.name || actor.name || 'Token';
-
-		if ( hide_name ) 
-		{
-			header_text = race_str ? race_str : 'Token Details';
-		}
-		else 
-		{
-			header_text = race_str ? `${ token_name } (${ race_str })` : token_name;
-		}
-
 		/** retrieve setting for enabling health condition **/
 		const show_health = ( game as any ).settings.get( 'yugen-modifiers', 'enable-health-condition' );
 		let health_badge: HTMLSpanElement | null = null;
@@ -459,6 +410,58 @@ export class TokenHoverManager
 			}
 		}
 
+		if ( unique_effects.length === 0 && weapons.length === 0 && armor.length === 0 && !health_badge ) 
+		{
+			return;
+		}
+
+		/** retrieve settings for hiding name and showing race **/
+		const hide_name = ( game as any ).settings.get( 'yugen-modifiers', 'hide-token-name' );
+		const show_race = ( game as any ).settings.get( 'yugen-modifiers', 'show-token-race' );
+
+		let race_str = '';
+		if ( show_race ) 
+		{
+			let race = '';
+			if ( actor.system?.details?.race ) 
+			{
+				race = typeof actor.system.details.race === 'string'
+					? actor.system.details.race
+					: ( actor.system.details.race.name || '' );
+			}
+
+			if ( !race ) 
+			{
+				/** check for race or ancestry item in actor items **/
+				const race_item = actor.items?.find( ( i: any ) => 
+					i.type === 'race' || 
+					i.type === 'ancestry' 
+				);
+
+				if ( race_item ) 
+				{
+					race = race_item.name;
+				}
+			}
+
+			if ( race ) 
+			{
+				race_str = race;
+			}
+		}
+
+		let header_text = '';
+		const token_name = token.name || actor.name || 'Token';
+
+		if ( hide_name ) 
+		{
+			header_text = race_str ? race_str : 'Token Details';
+		}
+		else 
+		{
+			header_text = race_str ? `${ token_name } (${ race_str })` : token_name;
+		}
+
 		this.destroy( );
 
 		this.tooltip_element = document.createElement( 'div' );
@@ -478,6 +481,8 @@ export class TokenHoverManager
 		divider.className = 'yugen-modifiers-token-divider';
 		this.tooltip_element.appendChild( divider );
 
+		let rendered_sections = 0;
+
 		/** render health condition row if present **/
 		if ( health_badge ) 
 		{
@@ -485,71 +490,82 @@ export class TokenHoverManager
 			health_row.className = 'yugen-modifiers-token-health-row';
 			health_row.appendChild( health_badge );
 			this.tooltip_element.appendChild( health_row );
-
-			const health_divider = document.createElement( 'div' );
-			health_divider.className = 'yugen-modifiers-token-divider';
-			health_divider.style.marginTop = '8px';
-			this.tooltip_element.appendChild( health_divider );
+			rendered_sections++;
 		}
 
-		/** render equipped weapons section **/
-		const weapons_title = document.createElement( 'div' );
-		weapons_title.className = 'yugen-modifiers-token-section-title';
-		weapons_title.innerText = 'Equipped Weapons';
-		this.tooltip_element.appendChild( weapons_title );
-
-		const weapons_list = document.createElement( 'div' );
-		weapons_list.className = 'yugen-modifiers-token-list';
-
-		if ( weapons.length > 0 ) 
+		/** render equipped weapons section if enabled **/
+		if ( show_weapons ) 
 		{
-			for ( const weapon of weapons ) 
+			if ( rendered_sections > 0 ) 
 			{
-				const item = document.createElement( 'div' );
-				item.className = 'yugen-modifiers-token-item';
-
-				if ( weapon.img ) 
-				{
-					const icon = document.createElement( 'img' );
-					icon.className = 'yugen-modifiers-token-icon';
-					icon.src = weapon.img;
-					item.appendChild( icon );
-				}
-
-				const info = document.createElement( 'div' );
-				info.className = 'yugen-modifiers-token-info';
-
-				const label = document.createElement( 'span' );
-				label.className = 'yugen-modifiers-token-label';
-				label.innerText = weapon.name;
-				info.appendChild( label );
-
-				const extra = document.createElement( 'span' );
-				extra.className = 'yugen-modifiers-token-extra';
-				extra.innerText = weapon.equip_type;
-				info.appendChild( extra );
-
-				item.appendChild( info );
-				weapons_list.appendChild( item );
+				const weapons_divider = document.createElement( 'div' );
+				weapons_divider.className = 'yugen-modifiers-token-divider';
+				weapons_divider.style.marginTop = '8px';
+				this.tooltip_element.appendChild( weapons_divider );
 			}
-		}
-		else 
-		{
-			const no_weapon = document.createElement( 'div' );
-			no_weapon.className = 'yugen-modifiers-token-no-item';
-			no_weapon.innerText = 'No weapon';
-			weapons_list.appendChild( no_weapon );
-		}
 
-		this.tooltip_element.appendChild( weapons_list );
+			const weapons_title = document.createElement( 'div' );
+			weapons_title.className = 'yugen-modifiers-token-section-title';
+			weapons_title.innerText = 'Equipped Weapons';
+			this.tooltip_element.appendChild( weapons_title );
+
+			const weapons_list = document.createElement( 'div' );
+			weapons_list.className = 'yugen-modifiers-token-list';
+
+			if ( weapons.length > 0 ) 
+			{
+				for ( const weapon of weapons ) 
+				{
+					const item = document.createElement( 'div' );
+					item.className = 'yugen-modifiers-token-item';
+
+					if ( weapon.img ) 
+					{
+						const icon = document.createElement( 'img' );
+						icon.className = 'yugen-modifiers-token-icon';
+						icon.src = weapon.img;
+						item.appendChild( icon );
+					}
+
+					const info = document.createElement( 'div' );
+					info.className = 'yugen-modifiers-token-info';
+
+					const label = document.createElement( 'span' );
+					label.className = 'yugen-modifiers-token-label';
+					label.innerText = weapon.name;
+					info.appendChild( label );
+
+					const extra = document.createElement( 'span' );
+					extra.className = 'yugen-modifiers-token-extra';
+					extra.innerText = weapon.equip_type;
+					info.appendChild( extra );
+
+					item.appendChild( info );
+					weapons_list.appendChild( item );
+				}
+			}
+			else 
+			{
+				const no_weapon = document.createElement( 'div' );
+				no_weapon.className = 'yugen-modifiers-token-no-item';
+				no_weapon.innerText = 'No weapon';
+				weapons_list.appendChild( no_weapon );
+			}
+
+			this.tooltip_element.appendChild( weapons_list );
+			rendered_sections++;
+		}
 
 		/** render equipped armor section if present **/
 		if ( armor.length > 0 ) 
 		{
-			const inner_divider = document.createElement( 'div' );
-			inner_divider.className = 'yugen-modifiers-token-divider';
-			inner_divider.style.marginTop = '8px';
-			this.tooltip_element.appendChild( inner_divider );
+			if ( rendered_sections > 0 ) 
+			{
+				const armor_divider = document.createElement( 'div' );
+				armor_divider.className = 'yugen-modifiers-token-divider';
+				armor_divider.style.marginTop = '8px';
+				this.tooltip_element.appendChild( armor_divider );
+			}
 
 			const armor_title = document.createElement( 'div' );
 			armor_title.className = 'yugen-modifiers-token-section-title';
@@ -590,15 +606,19 @@ export class TokenHoverManager
 			}
 
 			this.tooltip_element.appendChild( armor_list );
+			rendered_sections++;
 		}
 
 		/** render active effects section if present **/
 		if ( unique_effects.length > 0 ) 
 		{
-			const inner_divider = document.createElement( 'div' );
-			inner_divider.className = 'yugen-modifiers-token-divider';
-			inner_divider.style.marginTop = '8px';
-			this.tooltip_element.appendChild( inner_divider );
+			if ( rendered_sections > 0 ) 
+			{
+				const effects_divider = document.createElement( 'div' );
+				effects_divider.className = 'yugen-modifiers-token-divider';
+				effects_divider.style.marginTop = '8px';
+				this.tooltip_element.appendChild( effects_divider );
+			}
 
 			const effects_title = document.createElement( 'div' );
 			effects_title.className = 'yugen-modifiers-token-section-title';

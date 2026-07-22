@@ -9,6 +9,8 @@
   "yugen-modifiers.settings.enable-token-hover-effects.hint": "Display a floating UI listing the active conditions, concentration, and temporary effects of a token when hovering over it.",
   "yugen-modifiers.settings.show-non-physical-weapons.name": "Show Non-Physical Weapons",
   "yugen-modifiers.settings.show-non-physical-weapons.hint": "Display unarmed strikes, natural attacks, and spell action weapons in the hover tooltip. Disabling this prevents metagaming.",
+  "yugen-modifiers.settings.show-equipped-weapons.name": "Show Equipped Weapons",
+  "yugen-modifiers.settings.show-equipped-weapons.hint": "Display equipped weapons in the token hover tooltip. Disabling this prevents metagaming.",
   "yugen-modifiers.settings.show-equipped-armor.name": "Show Equipped Armor",
   "yugen-modifiers.settings.show-equipped-armor.hint": "Display equipped armor and shields in the token hover tooltip. Disabling this prevents metagaming.",
   "yugen-modifiers.settings.hide-token-name.name": "Hide Token Name",

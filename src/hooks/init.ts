@@ -10,12 +10,18 @@ import { update_item_hook } from './update-item.js';
 import { delete_item_hook } from './delete-item.js';
 import { update_actor_hook } from './update-actor.js';
 import { update_token_hook } from './update-token.js';
+import { TokenHoverManager } from '../module/token-hover-manager.js';
 
 export const init_hook = ( ) => 
 {
 	/** initialize the module **/
 	Hooks.once( 'init', async ( ) => 
 	{
+		( globalThis as any ).yugen_modifiers = 
+		{
+			TokenHoverManager
+		};
+
 		register_settings( );
 		RollParser.activate_listeners( );
 		hover_token_hook( );
@@ -95,6 +101,17 @@ const register_settings = ( ) =>
 		config: true,
 		type: Boolean,
 		default: false
+	} );
+
+	/** register setting for showing equipped weapons **/
+	( game as any ).settings.register( 'yugen-modifiers', 'show-equipped-weapons', 
+	{
+		name: 'yugen-modifiers.settings.show-equipped-weapons.name',
+		hint: 'yugen-modifiers.settings.show-equipped-weapons.hint',
+		scope: 'world',
+		config: true,
+		type: Boolean,
+		default: true
 	} );
 
 	/** register setting for showing equipped armor **/
